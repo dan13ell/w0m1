@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 (function(){var d=document.documentElement;d.classList.add("js");
-try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("motion","intro")}else{d.classList.add("still")}}catch(e){}
+try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("motion")}else{d.classList.add("still")}}catch(e){}
 try{if(matchMedia("(pointer: fine)").matches)d.classList.add("fine")}catch(e){}})();
 </script>
 <style>
@@ -44,7 +44,7 @@ try{if(matchMedia("(pointer: fine)").matches)d.classList.add("fine")}catch(e){}}
 }
 @property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
@@ -60,9 +60,9 @@ p{margin:0}
 /* ambient light + animated grain */
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background:radial-gradient(900px 520px at 78% -8%, rgba(155,77,240,.16), transparent 60%),radial-gradient(700px 420px at 8% 4%, rgba(114,228,255,.05), transparent 60%);}
-body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:150;opacity:.06;mix-blend-mode:overlay;
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:150;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
-html.motion body::after{animation:grain 1s steps(6) infinite}
+
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 main,header,footer{position:relative;z-index:1}
 
@@ -87,7 +87,7 @@ html.intro #intro.out{clip-path:inset(0 0 100% 0)}
 #prog{position:fixed;top:0;left:0;right:0;height:2px;z-index:70;transform-origin:left;transform:scaleX(var(--p,0));background:linear-gradient(90deg,#6421C6,#C987FF,#72E4FF);pointer-events:none}
 #fx{position:fixed;inset:0;width:100%;height:100%;z-index:300;pointer-events:none}
 .cur{display:none}
-html.fine.motion .cur{display:block;position:fixed;top:0;left:0;z-index:350;pointer-events:none;border-radius:50%;will-change:transform}
+html.fine.motion .cur-x{display:block;position:fixed;top:0;left:0;z-index:350;pointer-events:none;border-radius:50%;will-change:transform}
 .cur-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:#fff}
 .cur-ring{width:36px;height:36px;margin:-18px 0 0 -18px;box-shadow:inset 0 0 0 1.5px rgba(208,139,255,.75);transition:width .25s var(--ease),height .25s var(--ease),margin .25s var(--ease),background .25s,box-shadow .25s}
 .cur-ring.big{width:64px;height:64px;margin:-32px 0 0 -32px;background:rgba(155,77,240,.12);box-shadow:inset 0 0 0 1.5px rgba(208,139,255,.95)}
@@ -126,7 +126,7 @@ html.motion .btn-shine::after{animation:shine 4.5s 2.5s var(--ease) infinite}
 .ring::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:3;
   background:conic-gradient(from var(--ang),transparent 0 55%,rgba(208,139,255,.95) 70%,rgba(114,228,255,.9) 78%,transparent 90%);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
-html.motion .ring::before{animation:spin 5s linear infinite}
+
 @keyframes spin{to{--ang:360deg}}
 
 /* spotlight cards */
@@ -174,7 +174,7 @@ html.motion .is-live .dot{animation:ping 2s infinite}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:48px;align-items:start}
 .hero-copy{padding-top:34px;padding-bottom:64px;will-change:transform}
 .pill{position:relative;display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border-radius:999px;font-size:14px;color:var(--text);
-  background:linear-gradient(180deg,rgba(23,22,30,.85),rgba(18,17,24,.85));box-shadow:inset 0 0 0 1px var(--line-2);backdrop-filter:blur(8px)}
+  background:linear-gradient(180deg,rgba(23,22,30,.85),rgba(18,17,24,.85));box-shadow:inset 0 0 0 1px var(--line-2)}
 .pill-tag{white-space:nowrap;padding:4px 10px;border-radius:999px;font-size:12.5px;font-weight:600;color:#fff;background:radial-gradient(130% 150% at 50% -10%, #C987FF, #8E3EEB 50%, #6421C6);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
 .pill svg{width:14px;height:14px;color:var(--faint);transition:transform .3s var(--ease)}
 .pill:hover svg{transform:translateX(3px)}
@@ -182,7 +182,7 @@ html.motion .is-live .dot{animation:ping 2s infinite}
 .hero h1 .wd>span{color:transparent;-webkit-background-clip:text;background-clip:text;
   background-image:linear-gradient(100deg,transparent 40%,rgba(236,206,255,.95) 50%,transparent 60%),linear-gradient(180deg,#FFFFFF 30%,#B9B3C9 100%);
   background-size:320% 100%,100% 100%;background-position:120% 0,0 0;padding-bottom:.04em}
-html.motion .hero h1 .wd>span{animation:shimmer 7s 2.5s ease-in-out infinite}
+
 @keyframes shimmer{0%{background-position:120% 0,0 0}45%,100%{background-position:-20% 0,0 0}}
 .hero-lead{margin-top:24px;max-width:33em;font-size:18px;line-height:1.6;color:var(--muted)}
 .hero-lead strong{color:var(--text);font-weight:600}
@@ -490,13 +490,13 @@ html.motion .contact::after{animation:gloss 6s 1s ease-in-out infinite}
 
 /* closing cta */
 .final{margin-top:130px;position:relative;isolation:isolate;border-radius:32px;padding:110px 24px;text-align:center;overflow:hidden;background:linear-gradient(180deg,#131219,#0D0C12);box-shadow:inset 0 0 0 1px var(--line-2)}
-.final .blob{position:absolute;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.75;pointer-events:none}
-.final .b1{width:520px;height:520px;left:50%;bottom:-360px;margin-left:-260px;background:conic-gradient(from 0deg,#6421C6,#C987FF,#72E4FF,#8E3EEB,#6421C6)}
-.final .b2{width:260px;height:260px;left:8%;top:-120px;background:rgba(114,228,255,.35)}
-.final .b3{width:300px;height:300px;right:4%;top:-140px;background:rgba(155,77,240,.45)}
-html.motion .final .b1{animation:rot 12s linear infinite}
-html.motion .final .b2{animation:float 9s ease-in-out infinite}
-html.motion .final .b3{animation:float 11s ease-in-out infinite reverse}
+.final .blob{position:absolute;z-index:-1;border-radius:50%;opacity:.6;pointer-events:none;background:radial-gradient(closest-side,var(--bc),transparent)!important}
+.final .b1{--bc:rgba(155,77,240,.9);width:900px;height:600px;left:50%;bottom:-380px;margin-left:-450px}
+.final .b2{--bc:rgba(114,228,255,.45);width:420px;height:420px;left:0;top:-200px}
+.final .b3{--bc:rgba(155,77,240,.55);width:460px;height:460px;right:-60px;top:-220px}
+
+
+
 .final .grid{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;
   -webkit-mask-image:radial-gradient(60% 70% at 50% 100%,#000,transparent);mask-image:radial-gradient(60% 70% at 50% 100%,#000,transparent);transform:perspective(500px) rotateX(55deg) scale(2);transform-origin:bottom}
 .final h2{position:relative;z-index:2;font-size:clamp(46px,7vw,96px);line-height:.95;font-weight:800;letter-spacing:-.045em}
@@ -534,8 +534,8 @@ html.motion .final .b3{animation:float 11s ease-in-out infinite reverse}
    ========================================================= */
 /* section ambient light */
 .sec::before{content:"";position:absolute;z-index:-1;pointer-events:none;top:40px;left:var(--ox,-10%);width:760px;height:560px;border-radius:50%;
-  background:radial-gradient(closest-side,var(--orb,rgba(155,77,240,.18)),transparent);filter:blur(30px)}
-html.motion .sec::before{animation:orbDrift 16s ease-in-out infinite}
+  background:radial-gradient(closest-side,var(--orb,rgba(155,77,240,.18)),transparent)}
+
 @keyframes orbDrift{50%{transform:translate(40px,30px) scale(1.08)}}
 
 /* generic CSS-3D scene */
@@ -638,8 +638,8 @@ html.motion .in .lvl i{animation:hexIn .6s cubic-bezier(.3,1.7,.5,1) both;animat
 .pod-lights i:nth-child(1){left:calc(50% - 110px)}
 .pod-lights i:nth-child(2){left:18%;transform:rotate(-14deg);background:linear-gradient(180deg,rgba(208,139,255,.14),transparent 75%)}
 .pod-lights i:nth-child(3){right:18%;transform:rotate(14deg);background:linear-gradient(180deg,rgba(114,228,255,.12),transparent 75%)}
-html.motion .pod-lights i:nth-child(2){animation:sweepL 7s ease-in-out infinite}
-html.motion .pod-lights i:nth-child(3){animation:sweepR 8s ease-in-out infinite}
+
+
 @keyframes sweepL{50%{transform:rotate(6deg)}}
 @keyframes sweepR{50%{transform:rotate(-6deg)}}
 .pod-floor-glow{position:absolute;inset:-60px -80px;border-radius:50%;background:radial-gradient(closest-side,rgba(155,77,240,.35),transparent);pointer-events:none}
@@ -649,10 +649,10 @@ html.motion .pod-lights i:nth-child(3){animation:sweepR 8s ease-in-out infinite}
 .pg .cub{--m:#F5C451}
 .pg2 .cub{--m:#C9CFDA}.pg3 .cub{--m:#E09363}
 .pg .f-top{background:linear-gradient(135deg,color-mix(in srgb,var(--m) 42%,#1A1724),#15131D 70%);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--m) 80%,transparent),0 0 50px color-mix(in srgb,var(--m) 30%,transparent)}
-.pg .f-front{background:linear-gradient(to top,#0C0B10,#1F1C2A);box-shadow:inset 0 2px 0 var(--m),inset 0 0 0 1px rgba(255,255,255,.06);display:grid;place-items:center;overflow:hidden}
+.pg .f-front{background:linear-gradient(to top,#0C0B10,#1F1C2A);box-shadow:inset 0 2px 0 var(--m),inset 0 0 0 1px rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;overflow:visible}
 .pg .f-left,.pg .f-right{background:linear-gradient(#0E0D13,#0E0D13)}
 .pg .f-back{background:#0E0D13}
-.pg-num{font-family:var(--font-display);font-weight:800;line-height:1;font-size:var(--nf,80px);letter-spacing:-.05em;background:linear-gradient(180deg,#fff,var(--m) 70%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 20px color-mix(in srgb,var(--m) 50%,transparent))}
+.pg-num{display:block;font-family:var(--font-display);font-weight:800;line-height:1;font-size:var(--nf,80px);letter-spacing:0;color:var(--m);text-shadow:0 1px 0 rgba(255,255,255,.35),0 0 24px color-mix(in srgb,var(--m) 55%,transparent);white-space:nowrap}
 .pg-card{width:var(--cw,180px);padding:10px 10px 12px;margin-top:-14px;border-radius:16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:3px;
   background:linear-gradient(180deg,rgba(32,29,42,.95),rgba(19,18,25,.95));box-shadow:inset 0 0 0 1px rgba(255,255,255,.1),0 20px 40px -14px rgba(0,0,0,.9);transition:transform .4s var(--ease),opacity .6s var(--ease) .7s}
 .pg.pre .pg-card{opacity:0;transform:translate(-50%,-80%) scale(.8)}
@@ -747,11 +747,11 @@ html.motion .req:not(.in) .chk{transform:scale(0)}
 
 /* isometric seats */
 .join{gap:18px}
-.seats3d{height:250px;margin:-10px -20px 0;cursor:crosshair}
+.seats3d{flex:1;min-height:250px;height:auto;margin:-10px -20px 0;cursor:crosshair}
 .seats3d .floor{top:52%;--fx:56deg;--fz:-38deg}
 .seat .cub{--c1:#C99BFF;--c2:#8545D9;--c3:#3B1876}
 .seat{position:absolute;transform-style:preserve-3d}
-html.motion .seats3d.in .seat{animation:seatDrop .7s cubic-bezier(.3,1.4,.5,1) both,seatBob 2.8s ease-in-out infinite;animation-delay:calc(var(--k2) * 16ms),calc(1.2s + var(--k) * -.18s)}
+html.motion .seats3d.in .seat{animation:seatDrop .7s cubic-bezier(.3,1.4,.5,1) both;animation-delay:calc(var(--k2) * 16ms)}
 html.motion .seats3d:not(.in) .seat{visibility:hidden}
 @keyframes seatDrop{from{transform:translateZ(140px)}}
 @keyframes seatBob{0%,100%{transform:translateZ(0)}50%{transform:translateZ(7px)}}
@@ -814,7 +814,7 @@ html.motion .orbit-ring{animation:orbitSpin 46s linear infinite}
 .clan-badge::before{content:"";position:absolute;inset:0;border-radius:inherit;background:conic-gradient(from var(--ang),#6421C6,#C987FF,#72E4FF,#F5C451,#C987FF,#6421C6)}
 html.motion .clan-badge::before{animation:spin 6s linear infinite}
 .clan-badge::after{content:"";position:absolute;inset:-14px;border-radius:36px;z-index:-1;background:radial-gradient(closest-side,rgba(201,135,255,.65),transparent);filter:blur(10px)}
-html.motion .clan-badge::after{animation:beamPulse 3s ease-in-out infinite}
+
 .clan-badge img{position:relative;width:100%;height:100%;border-radius:22px;object-fit:cover;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
 html.motion .clan-badge{animation:float 5s ease-in-out infinite}
 .cb-lvl{position:absolute;right:-8px;bottom:-8px;min-width:30px;height:30px;padding:0 7px;border-radius:10px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:14px;color:#2A0F55;background:linear-gradient(180deg,#fff,#E3C2FF);box-shadow:0 0 0 3px var(--bg),0 6px 16px -4px rgba(201,135,255,.9)}
@@ -967,23 +967,97 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
   .oc{width:122px;left:-61px}
   .oc b{max-width:70px}
 }
+
+/* ===== v5: lighter, shorter ===== */
+.cm-sub{margin-top:8px;font-size:14.5px;color:var(--muted)}
+.bento{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-areas:"chart chart chart s1" "chart chart chart s2" "chart chart chart s3"}
+.stat-tile{min-height:0;gap:18px;padding:22px}
+.stat-tile strong{font-size:clamp(32px,3vw,44px)}
+.chart-stage{min-height:430px}
+.chart-top{align-items:center}
+.sec{padding-top:110px}
+.sec-head{margin-bottom:32px}
+.recruit{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:stretch}
+.join{gap:14px}
+.join-side{display:flex;flex-direction:column;gap:16px}
+.join-side .req{flex:1}
+.req-in{padding:24px}
+.req-list li{padding:12px 14px}
+.gift{position:relative;overflow:hidden;display:flex;align-items:center;gap:18px;padding:18px 20px;border-radius:22px;color:#fff;
+  background:radial-gradient(90% 140% at 0% 0%,rgba(255,226,154,.25),transparent 55%),linear-gradient(135deg,#8E3EEB,#4A158F 70%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(208,139,255,.4),0 24px 50px -24px rgba(142,62,235,.8);transition:transform .4s var(--ease),box-shadow .3s}
+.gift::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-18deg);transition:left .8s var(--ease)}
+.gift:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),inset 0 0 0 1px rgba(255,226,154,.6),0 30px 60px -20px rgba(142,62,235,.9)}
+.gift:hover::after{left:130%}
+.gift-box{position:relative;width:54px;height:54px;flex:none}
+.gift-body{position:absolute;left:6px;right:6px;bottom:2px;height:32px;border-radius:6px;background:linear-gradient(180deg,#FFE29A,#F5A623)}
+.gift-lid{position:absolute;left:2px;right:2px;top:12px;height:12px;border-radius:5px;background:linear-gradient(180deg,#FFF0C4,#F5C451);transform-origin:10% 100%;transition:transform .5s cubic-bezier(.3,1.6,.5,1);z-index:2}
+.gift-ribbon{position:absolute;left:50%;top:12px;bottom:2px;width:8px;margin-left:-4px;background:#9B4DF0;z-index:3;border-radius:2px}
+.gift-ribbon::before,.gift-ribbon::after{content:"";position:absolute;top:-10px;width:14px;height:12px;border:3px solid #C987FF;border-radius:50% 50% 0 50%}
+.gift-ribbon::before{right:4px;transform:rotate(-20deg)}
+.gift-ribbon::after{left:4px;transform:scaleX(-1) rotate(-20deg)}
+.gift:hover .gift-lid{transform:translateY(-10px) rotate(-18deg)}
+html.motion .gift-box{animation:giftWiggle 3.5s ease-in-out infinite}
+@keyframes giftWiggle{0%,80%,100%{transform:rotate(0)}84%{transform:rotate(-8deg)}88%{transform:rotate(7deg)}92%{transform:rotate(-4deg)}}
+.gift-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.gift-txt small{font-size:13px;opacity:.8}
+.gift-txt b{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.gift-live{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:99px;font-size:12.5px;font-weight:700;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.gift-live i{width:8px;height:8px;border-radius:50%;background:#4ADE80;box-shadow:0 0 8px #4ADE80}
+.faq{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr)}
+.faq-side{gap:14px}
+.chat{height:470px}
+.final{padding:90px 24px 80px}
+.mega{font-size:clamp(90px,18vw,240px)}
+.sticky-join{position:fixed;right:20px;bottom:20px;z-index:80;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 10px 0 18px;border-radius:16px;color:#fff;font-weight:600;font-size:15px;
+  background:radial-gradient(130% 150% at 50% -10%,#C987FF 0%,#8E3EEB 45%,#6421C6 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 18px 40px -12px rgba(142,62,235,.8);
+  transform:translateY(120px);opacity:0;transition:transform .5s var(--ease),opacity .3s}
+.sticky-join.show{transform:none;opacity:1}
+.sticky-join svg{width:20px;height:20px}
+.sticky-join b{height:32px;padding:0 10px;border-radius:10px;display:grid;place-items:center;font-size:12.5px;background:rgba(0,0,0,.25);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+@media (max-width:1080px){
+  .bento{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:"chart chart chart" "s1 s2 s3"}
+  .recruit,.faq{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .bento{grid-template-columns:1fr 1fr;grid-template-areas:"chart chart" "s1 s2" "s3 s3"}
+  .stat-tile{padding:18px}
+  .stat-tile strong{font-size:30px}
+  .dots{grid-template-columns:repeat(10,1fr)}
+  .sec{padding-top:80px}
+  .chart-stage{min-height:380px}
+  .gift-txt b{font-size:18px}
+  .chat{height:440px}
+  .sticky-join{left:16px;right:16px;bottom:14px;justify-content:center}
+  .sticky-join b{margin-left:auto}
+}
+
+/* v6: tighter rhythm, readable last tower */
+.sky .floor{top:64%}
+.sky{min-height:340px;margin-top:-6px}
+.chart-stage{padding-top:20px}
+.barg.last .bb.lbl{padding:7px 12px 8px}
+.barg.last .bb.lbl b{font-size:20px}
+.sec{padding-top:64px}
+.sec-head{margin-bottom:22px}
+.kick{margin-bottom:10px}
+.final{margin-top:64px;padding:70px 24px 64px}
+.foot{margin-top:56px;padding-top:40px}
+.hero-copy{padding-bottom:36px}
+.ticker{margin-top:0}
+.track{padding-top:26px;padding-bottom:10px}
+.track-card{margin-bottom:0}
+.board-foot{padding-top:12px}
+.chart-cap{flex-wrap:wrap}
+.pod3d{height:440px}
+@media (max-width:720px){.sec{padding-top:48px}.final{margin-top:48px}.sky .floor{top:60%}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<div id="intro" aria-hidden="true">
-  <div class="intro-in">
-    <img class="intro-logo" src="data:image/webp;base64,UklGRnoMAABXRUJQVlA4WAoAAAAgAAAAfwAAfwAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggjAoAAPAuAJ0BKoAAgAA+YSiRRSQioZYIruRABgS2AGWzCD9V6dDu3cvx85r3grwnzWHfeOZyr/nPt8+af+19SX509gD9Pf811GvMB+sP7N+8B/qv2V91/999QD+lf2L/2est7Gf7kewX+6Xpj/u58Lv7mekl//71S/IeIfko9sy3e8r+i7nb6Pir4BHsbev/R+dXbe8nhIb6NOlb60FPbp4nO1BxjXr/oLnpWYrzZj130I4sSssqxd1Hnqv227wiSZIcODJQ502CuvVITVpRPUD68LVP+c6R/tRRCHeEKr8SYbvmFgA5r93y9zCJQF7F7ZqjkQyfsN31bis82LKHaqK6K1i/3IpEeXyY53AW1pLhVzPTalPk6RtmHpKh4GVMoYqLhCpPp48h6FyugxZgwZ0sbhjL3x56jRzZ0bQrgAY4SNzusvs65NdSbvzyZSCUnfd/AXwC0KBmvyOP1FooW03npOkPIpVecJOsybaFCmu19wh8sXhT+Hh7R+PBojzLzJtNUgD++2TT2xD/xiItRX+v343Dn/Dr9U7kFfccSKdfT6KViH6oj0M/IuYOz5Uqai5iifM3fgzCy95MVaF5uL2EGH7fwcCqnw4v6U5rV5Mbc+Py8oIEEROdD+O3Gb0L13a/kGWXmpiEGuLy4WDDrOjNDiRuUBsz8Nn2J2XSTIrBDapxUfL5qKDg+yMTmkUldWHJOntEpVPi9qyhW2Nq37sgsn35ssUIIxuRpNaiHmAe+ZkCsfQ/+poWXWV/bg4l74HQU7NNjmYBA+4F8AWHDvmVf7OobHdSuLTzCO3OWgO1cTyAnb8QUUudVtDhlblBjqsKm0hLYUphd9Rm5MRfH3QBK16GfX14ANDjFIjT1NZO6S7gwvcwsigbJtJX5yHU7TF8v/zJ0yWY6qHg1a+5jD+BlCS5OcYzePQ8nw1UNyHkl9rh2gdN9lqmMuF+DTUqyrtcu1suyaAs8VkaVnTbsqx1hZp/Igp6f5io/0xecqFz3k4erBmz8MZp8QRGoZ6cBReA/0xgoSLrUjgJBo483x9L8Zp7ssYU21+ncuCT+a0Nw0HpjqP9f/1BSexJy/Tx+yOPD4Bl1OPKwKYVOZJFexoCUYvc4pbbv5Eu6s6v3RRIaWyygcIcnQU9keDB6MzqK28Rh5hKWeFjcYlVj+XS1g+2prAnnikdz4rNvaGOEf4UBHCzJAYCfdwzn1580MXCnJ+D0j1hFbLyC6n0XdQJep54p5mJtumidSjumE3Fur467hlhp3/nLlxBV8Z5ztPzZdJEtWfClH/eIvSNDEqmWdhL8Q9Zs3/tOZPpJZEi9JhS2R2lO5kqG9Hfh/6khDy0k4Nfg/5v9cC1o19VEHP9T9gPHhdtxQh/xwlFZeE8sv/T2R0As9KMnFsu615V0zD6gcl8g//pCeS+Ljqbq3MTU+OIc+aSfQpzW40XVuNNMla9jdCFGeFGmGOGJdSy4y6E1mDXuqdL36KDepUO4UflQVpJIko9iU3/cQLcSB3iYzNKyvOldmsDV7J7ANMOtbypmcLgrtRaH3ahcm96CvTSG1SBE/Z358JBtQEAO94EvBC4qdvZm4a+Far/m9Qtrbz3eUw7uQiGvH6ZBhW9iErLkdmYCX5kaBln8in5dE2N9Kl055EWUlR3mBF0j10OOeiolXRi4OyGFP2OpbLufNIDQglx1VmSVXt53ar5eZ9W/NvwTCCZnwHIYoSOpM855X7KsG9mi3uJh635FHrWAu1vZmL+PQflC9QidQ+6+ZiFVpeZaQnWqa35jl+AZi5WRqM7+fJ7yU/rI2ZQn2EJXzO85Ci89Xr/8aizsssPJ4eyuTL+R7sBPPwNGmwR6ekacEnmmhN6ibkQdUto/fTg8yWuEDbib6+9jz3I2nbjGzIe3dWn/Lb9epdzFYNySUN04e5Rj4EH/QjUEQqfqZleJ/KRWA9MSBlxKnoGBnA6NpfJz5gF5L79t0rirdFIZlp3bN9vWSIpDLPK2MzYlbgL3Ulj6427kA62FhjmZNuV9fNaTUZW9kdw4z7vyt/aOzLDGkxN7+BKDK66f/JeoN4uSxcQcAvTRalDkOgujuAUywqmdgDsHQ+uFvafmbOq8S31fEgcM51yraOda+Cye77PSB9Sy0EHt5eIFNnQAE7u/Y/RplmHgZOmnzTcvF/DPBeb0cwqAgj15TaaB9HJip/1L/y3geZ6BpmmiDrzZ6iwMJzZe8Ip0STGBHyCL20fQfoymjy4Mk8/rPrgjssITZJLCbtU+YCggL3DAzP38KjvtE3usMGfIMtDfSHo7mTJzbpEGKfGK27YdT9NRkw7jH/LfBlUU712o53/H/HAVvsaCty3mtg4i+/oh7E+UQEauWA+n217uwzqzTelZC75uMcIAFfG7CHkyvIy19qGFjurt/3XKAfL70Jfjl0aNcLJytpuL8VY2+Gd1sn9k615epH9h6HP0jAXgyOZsrkAzr+rH6vqNqNcHZvQcpLTmdEzdhm04u3oI/30rIXPZVGw2t8RTXzTbOSKq1pAwcj+NkCvP29aUQV+iIBtzo4Q7hpNVvQ8Etek6Y9tap15a8+bgGFDrcToAKZVKCKgMFURbb2MuxX79/8V4pgTBEUjBmgLCFLvwWui0s6kd9vHlJHFd9JDKkV54k65BcIlhp7cAAU2XQE9hN2LJcYp0NcYqHbnxIp4Qb0TsrBJcVhKrfMQA3NwYR696/RU8Z4zgMUfnUBkFH1d6Tc/U5ncJHuSY+lmsy69tILMrqHe8Un5zxlMIdf+dy2cGPNgnisjgRx/IGZdGGY22XTh2Wq1Qv45fT6O2ifo2pFOSMoEdS5mtS16h4xVpHnNz3Q0Z8ybrRarKrjfrWUmbVjcw5bxwMtVDSNklP4Ql7+kXMABA1eWeGHjVXN1j0A+ccavZWsilBmSYFY8yngh6M8j+j3LK5241uA0VqhnICVVnfdtizOxxjSBCtbLAFrNPfz6eqaXAb+AkL2RYpFg3eG8lSM+jQyGIIWEgxoa3ePZU4XcUPvymuXzcKxzz+zeogoK9QlDQInJ2qGtc7puZ/DeJTdw6cbKUFVREcFkyaJ5fylxPGPcXr0hg90NkT4FX9noj9t+7FMZ3kZTKvufjVuQM0sRlW/HkasjP7jc3RD+YinobCNE0ePqcn5DUTftqkszjjCcB7IXwIxV1SO6qGDaWov9bSrumvoLtFVNixpJ49dTzABqWbcCCb3xt+CIMImLhtVr/gfGu8BmvtHxQOR81jEtesxl6ekaCHWZ4qN7zX2Fdw27ZKY0FTWyUloiMA31zINhKI6OHlEZHyKxEZkIZftpWTxhLSr/a7BEo/7zlEMUuHvMU93/pYjEB3y1ELx4+lzjkIcQXcmxBMVRXz417xJv7Alwcb5rrVRQ1xndrDYasbYqkYVtK/IREqlnNbIw/Z0oiDmBJtn4YSTi2HVfPvvTeLrdU8gbw1zXpAbsYZW6338tsg1V+H2vlGZnqHdM14euThY9mTLNk6zoMiXWpfWfhb/oQpA8ph+dc254i6ceFArao6veeC6F4QYypPaH+lnL+o/ECf81TyoytSeKhgRcPLocgF0nLY1JBhGpfPo5HE5ldksKaVvLfoAAAA==" alt="">
-    <div class="intro-word"><span>W</span><span>0</span><span>M</span><span>1</span></div>
-    <div class="intro-bar"><i id="introBar"></i></div>
-    <div class="intro-pct" id="introPct">0 %</div>
-  </div>
-</div>
 <div id="prog" aria-hidden="true"></div>
 <canvas id="fx" aria-hidden="true"></canvas>
-<div class="cur cur-ring hide" id="curRing" aria-hidden="true"></div>
-<div class="cur cur-dot hide" id="curDot" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1044,7 +1118,7 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
           <div class="clan-badge"><img src="data:image/webp;base64,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" alt="Ikona klanu W0M1" id="clanIcon"><span class="cb-lvl num" id="cbLvl">7</span></div>
           <div class="clan-meta">
             <div class="cm-name">W0M1 <span class="flag" role="img" aria-label="Česko"></span></div>
-            <div class="cm-chips"><span><svg><use href="#i-bolt"/></svg><span id="cmLevel">Level 7</span></span><span><svg><use href="#i-trophy"/></svg><span id="cmMedals">25 medailí</span></span><span><svg><use href="#i-calendar"/></svg><span id="cmSince">od 2024</span></span></div>
+            <div class="cm-sub">Pet Simulator 99 klan</div>
           </div>
         </div>
         <a class="pill ring" href="#o-klanu" id="heroPill" data-rv data-hero style="--d:.08s">
@@ -1053,13 +1127,12 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
           <svg><use href="#i-right"/></svg>
         </a>
         <h1 class="split" data-hero data-split style="--d:.12s">Český klan, který jde po&nbsp;top&nbsp;50.</h1>
-        <p class="hero-lead" data-rv data-hero style="--d:.55s">W0M1 je soutěživý klan v&nbsp;Pet Simulator 99. Za poslední rok jsme se v&nbsp;Clan Wars dostali <strong id="leadClimb">z 2 500. místa na 35.</strong> a&nbsp;nekončíme. Hledáme hráče, kteří chtějí hrát naplno.</p>
+        <p class="hero-lead" data-rv data-hero style="--d:.55s">Aktivní parta, týdenní odměny v&nbsp;diamantech a&nbsp;giveawaye na Discordu. <strong>Hledáme hráče, co chtějí hrát naplno.</strong></p>
         <div class="hero-ctas" data-rv data-hero style="--d:.7s">
           <a class="btn btn-primary btn-shine js-burst" data-magnet href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Přidat se na Discordu</a>
           <a class="btn btn-ghost" data-magnet href="#clenove">Zobrazit žebříček</a>
         </div>
         <div class="proof" data-rv data-hero style="--d:.85s">
-          <div class="proof-label">Čísla přímo ze hry</div>
           <div class="proof-row">
             <div class="proof-item"><strong class="num" id="pRank">#35</strong><span id="pRankLbl">poslední Clan War</span></div>
             <div class="proof-item"><strong class="num" id="pMembers">48/50</strong><span>členů v klanu</span></div>
@@ -1083,54 +1156,30 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
       <div class="sec-head">
         <div>
           <div class="kick" data-rv><i></i>O klanu</div>
-          <h2 class="split" data-split>Víc než klan. Parta, co chce vyhrávat.</h2>
-          <p data-rv style="--d:.2s">W0M1 staví hráči pro hráče. Každý den hrajeme aktivně a&nbsp;každá Clan War je pro nás šance posunout se výš. Tady je vidět, kam jsme se za rok dostali.</p>
+          <h2 class="split" data-split>Za rok z #2 500 na #35.</h2>
         </div>
       </div>
       <div class="bento">
         <article class="card spot b-chart" data-rv><span class="edge"></span>
           <div class="chart-stage">
             <div class="chart-top">
-              <div>
-                <div class="climb num" id="climbBig"><span class="from">#2 500</span><svg><use href="#i-up"/></svg><span class="to">#35</span></div>
-                <p id="climbText">Každá věž je jedna Clan War. Čím vyšší věž, tím lepší umístění.</p>
-              </div>
-              <div class="legend"><span><i class="sq"></i>top 50</span><span><i class="sq s2"></i>top 150</span><span><i class="dash"></i>hranice top 50</span></div>
+              <div class="climb num" id="climbBig"><span class="from">#2 500</span><svg><use href="#i-up"/></svg><span class="to">#35</span></div>
             </div>
             <div class="scene sky" id="sky"><div class="floor" id="skyFloor"></div></div>
           </div>
-          <div class="chart-cap"><span id="skyRange">Christmas až Halloween Games</span><span>Nejlepší výsledek: <b id="bestPlace">#35</b></span></div>
-        </article>
-        <article class="card spot tile b-p1" data-rv data-tilt style="--d:.1s"><span class="edge"></span>
-          <div class="mini vs" aria-hidden="true">
-            <div class="vs-row"><span>W0M1</span><i class="vs-bar a"><b></b></i></div>
-            <div class="vs-row"><span>Ostatní</span><i class="vs-bar b"><b></b></i></div>
-            <div class="vs-badge">VS</div>
-          </div>
-          <h3>Soutěžíme</h3>
-          <p>Každý zápas bereme vážně. Hrajeme na výhru a&nbsp;v&nbsp;každém turnaji jdeme nahoru.</p>
-        </article>
-        <article class="card spot tile b-p2" data-rv data-tilt style="--d:.2s"><span class="edge"></span>
-          <div class="mini grow-chart" id="miniGrow" aria-hidden="true"></div>
-          <h3>Rosteme</h3>
-          <p>Rozbory hry, tréninky a&nbsp;zpětná vazba. Zlepší se každý, ať začíná odkudkoli.</p>
-        </article>
-        <article class="card spot tile b-p3" data-rv data-tilt style="--d:.1s"><span class="edge"></span>
-          <div class="mini team" id="miniTeam" aria-hidden="true"></div>
-          <h3>Jsme tým</h3>
-          <p>W0M1 není jen tag před nickem. Je to parta lidí, co chtějí vyhrávat spolu a&nbsp;bavit se u&nbsp;toho.</p>
+          <div class="chart-cap"><span class="legend"><span><i class="sq"></i>top 50</span><span><i class="sq s2"></i>top 150</span><span><i class="dash"></i>hranice top 50</span></span><span>Nejlepší: <b id="bestPlace">#35</b></span></div>
         </article>
         <article class="card spot stat-tile b-s1" data-rv data-tilt><span class="edge"></span>
           <div class="dots" id="cwDots" aria-hidden="true"></div>
           <div><strong class="num" id="sBattles">45</strong><span class="st-l">odehraných Clan Wars</span></div>
         </article>
         <article class="card spot stat-tile b-s2" data-rv data-tilt style="--d:.1s"><span class="edge"></span>
-          <div class="gem-rise" aria-hidden="true"><svg style="--x:12%;--d:0s;--s:1"><use href="#i-gem"/></svg><svg style="--x:30%;--d:-1.2s;--s:.6"><use href="#i-gem"/></svg><svg style="--x:48%;--d:-2.3s;--s:.85"><use href="#i-gem"/></svg><svg style="--x:66%;--d:-.6s;--s:.5"><use href="#i-gem"/></svg><svg style="--x:82%;--d:-3s;--s:.75"><use href="#i-gem"/></svg><svg style="--x:22%;--d:-3.6s;--s:.45"><use href="#i-gem"/></svg><svg style="--x:74%;--d:-1.8s;--s:.95"><use href="#i-gem"/></svg></div>
-          <div><strong class="num"><span id="sDia">19,4 mld</span><svg class="gem"><use href="#i-gem"/></svg></strong><span class="st-l">diamantů vložili členové celkem</span></div>
+          <div class="gem-rise" aria-hidden="true"><svg style="--x:12%;--d:0s;--s:1"><use href="#i-gem"/></svg><svg style="--x:40%;--d:-1.6s;--s:.6"><use href="#i-gem"/></svg><svg style="--x:66%;--d:-.8s;--s:.5"><use href="#i-gem"/></svg><svg style="--x:84%;--d:-3s;--s:.75"><use href="#i-gem"/></svg></div>
+          <div><strong class="num"><span id="sDia">19,4 mld</span><svg class="gem"><use href="#i-gem"/></svg></strong><span class="st-l">diamantů vložených do klanu</span></div>
         </article>
         <article class="card spot stat-tile b-s3" data-rv data-tilt style="--d:.2s"><span class="edge"></span>
           <div class="lvl" id="lvlHex" aria-hidden="true"></div>
-          <div><strong class="num" id="sLevel">Level 7</strong><span class="st-l" id="sSince">klan hraje od května 2024</span></div>
+          <div><strong class="num" id="sLevel">Level 7</strong><span class="st-l" id="sSince">od května 2024</span></div>
         </article>
       </div>
     </div>
@@ -1143,14 +1192,13 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
         <div>
           <div class="kick" data-rv><i></i>Žebříček</div>
           <h2 class="split" data-split>Členové a&nbsp;jejich body</h2>
-          <p data-rv style="--d:.2s">Živá data z&nbsp;Big Games API. U&nbsp;každého člena vidíš, kolik diamantů vložil do klanu a&nbsp;kolik bodů udělal v&nbsp;poslední Clan War.</p>
         </div>
       </div>
       <div class="card board" data-rv>
         <div class="board-bar">
           <div class="seg" role="tablist" aria-label="Řazení žebříčku" id="seg">
             <span class="seg-ind" id="segInd"></span>
-            <button role="tab" aria-selected="true" data-metric="cw" id="tab-cw">Clan Wars body</button>
+            <button role="tab" aria-selected="true" data-metric="cw" id="tab-cw">CW body</button>
             <button role="tab" aria-selected="false" data-metric="dia" id="tab-dia">Diamanty</button>
             <button role="tab" aria-selected="false" data-metric="join" id="tab-join">Nejdéle v klanu</button>
           </div>
@@ -1172,101 +1220,53 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
       <div class="sec-head">
         <div>
           <div class="kick" data-rv><i></i>Odměny</div>
-          <h2 class="split" data-split>Top 10 hráčů bere odměny</h2>
-          <p data-rv style="--d:.2s">Každý týden dělíme odměny mezi deset nejlepších hráčů podle bodů v&nbsp;Clan Wars. Stačí být aktivní a&nbsp;sbírat body. Čím výš stojíš, tím víc bereš.</p>
+          <h2 class="split" data-split>Top 10 bere diamanty. Každý týden.</h2>
         </div>
       </div>
       <div class="card track-card" data-rv>
-        <div class="fan-head"><div><h3 id="projTitle">Odměny za Halloween Games</h3><span id="projSub">konečné pořadí</span></div><span class="fan-hint">Čím výš stojíš, tím víc bereš</span></div>
+        <div class="fan-head"><div><h3 id="projTitle">Odměny za Halloween Games</h3><span id="projSub">konečné pořadí</span></div><span class="fan-hint">Vyplácíme po konci Clan War</span></div>
         <div class="track-scroll"><div class="track" id="proj"></div></div>
       </div>
-      <div class="rewards">
-        <div class="card spot rw-card" data-rv><span class="edge"></span>
-          <div class="rw-in gem-in">
-            <div class="gem-stage" id="gemStage">
-              <div class="beams"></div>
-              <canvas id="gem" aria-label="3D diamant, táhni myší a roztoč ho" role="img"></canvas>
-              <div class="gem-amt"><small>Odměna pro 1. místo</small><strong class="num">700 mil.</strong></div>
-              <div class="gem-hint"><svg><use href="#i-drag"/></svg>Táhni a roztoč</div>
-            </div>
-          </div>
-        </div>
-        <div class="card spot rw-card" data-rv style="--d:.12s"><span class="edge"></span>
-          <div class="rw-in">
-            <div class="rw-title"><h3>Žebříček odměn</h3><span>v diamantech</span></div>
-            <div class="ladder" id="tiers"></div>
-            <div class="rw-note">Odměny vyplácíme až po skončení Clan War. Do té doby se pořadí může měnit.</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- CONTESTS -->
-  <section class="sec" id="souteze" style="--orb:rgba(245,196,81,.10);--ox:-8%">
-    <div class="wrap">
-      <div class="card spot contest" data-rv><span class="edge"></span>
-        <div class="contest-copy">
-          <div class="kick"><i></i>Soutěže</div>
-          <h3>Klanové soutěže</h3>
-          <p>Kromě Clan Wars pořádáme vlastní soutěže jen pro členy W0M1. Vyhlašujeme je na Discordu a&nbsp;výsledky ukončených soutěží najdeš tady.</p>
-          <ul>
-            <li><svg><use href="#i-check"/></svg>Přihlásíš se Roblox a&nbsp;Discord nickem</li>
-            <li><svg><use href="#i-check"/></svg>Roblox nick ověříme, ať je všechno férově</li>
-            <li><svg><use href="#i-check"/></svg>Když přestaneš sbírat CW body, pingneme tě na Discordu</li>
-          </ul>
-        </div>
-        <div class="contest-side">
-          <div class="ticket-wrap">
-            <div class="ticket">
-              <div class="tk-main">
-                <div class="tk-top"><span class="tk-brand"><img src="data:image/webp;base64,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" alt="">W0M1 Cup</span><span class="tk-no num">#01</span></div>
-                <div class="tk-title">První klanová soutěž</div>
-                <div class="tk-meta"><div><small>Termín</small><b>Vyhlásíme na Discordu</b></div><div><small>Pro koho</small><b>Členy W0M1</b></div></div>
-              </div>
-              <div class="tk-stub"><div class="barcode"></div><small>Vstupenka</small></div>
-              <div class="tk-stamp" aria-hidden="true">UŽ BRZY</div>
-            </div>
-          </div>
-          <p class="contest-note"><b>Zatím žádná ukončená soutěž.</b> Až proběhne první, výsledky se objeví tady.</p>
-          <a class="btn btn-ghost btn-sm js-burst" href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Sledovat na Discordu</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RECRUIT -->
+  <!-- JOIN: recruit + giveaways -->
   <section class="sec" id="nabor" style="--orb:rgba(74,222,128,.08);--ox:58%">
     <div class="wrap">
       <div class="sec-head">
         <div>
           <div class="kick" data-rv><i></i>Nábor</div>
-          <h2 class="split" data-split>Hledáme nové hráče</h2>
-          <p data-rv style="--d:.2s">Chceš hrát v&nbsp;klanu, který míří do top 50? Napiš nám na Discord. Pomůžeme ti s&nbsp;prvními kroky, ať už hraješ competitive roky, nebo teprve začínáš.</p>
+          <h2 class="split" data-split>Přidej se k&nbsp;nám</h2>
         </div>
       </div>
       <div class="recruit">
-        <div class="card spot req" data-rv><span class="edge"></span>
-          <div class="req-in">
-            <h3>Úkoly pro vstup</h3>
-            <ul class="req-list quests" id="quests">
-              <li style="--q:0"><span class="ico"><svg><use href="#i-calendar"/></svg></span><div class="q-body"><b>Hraješ aktivně každý den</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
-              <li style="--q:1"><span class="ico"><svg><use href="#i-gem"/></svg></span><div class="q-body"><b>Vkládáš diamanty do klanu</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
-              <li style="--q:2"><span class="ico"><svg><use href="#i-bolt"/></svg></span><div class="q-body"><b>Máš přístup k&nbsp;turnajům a&nbsp;Clan Wars</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
-              <li style="--q:3"><span class="ico"><svg><use href="#i-discord"/></svg></span><div class="q-body"><b>Jsi na Discordu, kde se domlouváme</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
-            </ul>
-          </div>
-        </div>
-        <div class="card join ring" data-rv style="--d:.12s">
+        <div class="card join ring" data-rv>
           <div class="join-top">
             <div class="join-slots"><strong class="num" id="freeSlots">2</strong><span id="freeLbl">volná místa<br>z 50 v klanu</span></div>
           </div>
           <div class="scene seats3d" id="seats3d" aria-hidden="true"><div class="floor" id="seatFloor"></div></div>
-          <p>Místa se plní rychle. Napiš nám na Discord a&nbsp;ozveme se ti co nejdřív.</p>
           <div class="btns">
-            <a class="btn btn-primary btn-shine js-burst" data-magnet href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Přidat se do W0M1</a>
-            <a class="btn btn-ghost" data-magnet href="https://www.tiktok.com/@womi_518" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg>TikTok ownera</a>
+            <a class="btn btn-primary btn-shine js-burst" href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Přidat se do W0M1</a>
+            <a class="btn btn-ghost" href="https://www.tiktok.com/@womi_518" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg>TikTok</a>
           </div>
+        </div>
+        <div class="join-side">
+          <div class="card spot req" data-rv style="--d:.1s"><span class="edge"></span>
+            <div class="req-in">
+              <h3>Co chceme</h3>
+              <ul class="req-list quests" id="quests">
+                <li style="--q:0"><span class="ico"><svg><use href="#i-calendar"/></svg></span><div class="q-body"><b>Hraješ každý den</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
+                <li style="--q:1"><span class="ico"><svg><use href="#i-gem"/></svg></span><div class="q-body"><b>Vkládáš diamanty</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
+                <li style="--q:2"><span class="ico"><svg><use href="#i-bolt"/></svg></span><div class="q-body"><b>Hraješ Clan Wars</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
+                <li style="--q:3"><span class="ico"><svg><use href="#i-discord"/></svg></span><div class="q-body"><b>Jsi na Discordu</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
+              </ul>
+            </div>
+          </div>
+          <a class="gift js-burst" id="souteze" href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener" data-rv style="--d:.2s">
+            <span class="gift-box" aria-hidden="true"><span class="gift-lid"></span><span class="gift-body"></span><span class="gift-ribbon"></span></span>
+            <span class="gift-txt"><small>Na Discordu pořád běží</small><b>Giveawaye pro členy</b></span>
+            <span class="gift-live"><i></i>Live</span>
+          </a>
         </div>
       </div>
     </div>
@@ -1276,25 +1276,13 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
   <section class="sec" id="faq" style="--orb:rgba(88,101,242,.16);--ox:-10%">
     <div class="wrap faq">
       <div class="faq-side">
-        <div>
-          <div class="kick" data-rv><i></i>FAQ</div>
-          <h2 class="split" data-split>Časté otázky</h2>
-        </div>
-        <p data-rv style="--d:.15s">Vyber otázku a&nbsp;odpověď přijde jako na našem Discordu.</p>
-        <div class="contact" data-rv data-tilt style="--d:.25s">
-          <div class="contact-who"><img src="data:image/webp;base64,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" alt=""><div><b>Womi518</b><span>zakladatel W0M1</span></div></div>
-          <h3>Máš jinou otázku?</h3>
-          <p>Napiš na Discord, odpovídáme rychle. Novinky z&nbsp;klanu sleduj i&nbsp;na TikToku.</p>
-          <div class="btns">
-            <a class="btn btn-ghost btn-sm js-burst" href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Discord</a>
-            <a class="btn btn-ghost btn-sm" href="https://www.tiktok.com/@womi_518" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg>@womi_518</a>
-          </div>
-        </div>
+        <div class="kick" data-rv><i></i>FAQ</div>
+        <h2 class="split" data-split>Časté otázky</h2>
+        <p data-rv style="--d:.15s">Klikni na otázku. Na další ti odpovíme na Discordu.</p>
       </div>
       <div class="chat" data-rv style="--d:.1s">
         <div class="chat-top">
           <span class="hash">#</span><b>časté-otázky</b>
-          <span class="chat-sub">Klanový Discord W0M1</span>
           <span class="chat-online"><i></i><span id="chatOnline">48 členů</span></span>
         </div>
         <div class="chat-log" id="chatLog" aria-live="polite"></div>
@@ -1311,15 +1299,15 @@ html.motion .track .tp-line{transition:stroke-dashoffset 2.4s cubic-bezier(.6,0,
       <div class="blob b1" aria-hidden="true"></div><div class="blob b2" aria-hidden="true"></div><div class="blob b3" aria-hidden="true"></div>
       <div class="orbit3d" aria-hidden="true"><div class="orbit-ring" id="orbitRing"></div></div>
       <h2 id="finalTitle" class="split" data-split>Hrajeme o&nbsp;top 50. <span class="l2">Hraj s&nbsp;námi.</span></h2>
-      <p>Připoj se na Discord, napiš nám a&nbsp;další Clan War můžeš hrát už za W0M1.</p>
       <div class="btns">
-        <a class="btn btn-primary btn-shine js-burst" data-magnet href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Přidat se na Discordu</a>
-        <a class="btn btn-ghost" data-magnet href="#clenove">Projít členy</a>
+        <a class="btn btn-primary btn-shine js-burst" href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Přidat se na Discordu</a>
       </div>
       <small id="finalSmall">Zbývají 2 volná místa ze 50.</small>
     </section>
   </div>
 </main>
+
+<a class="sticky-join js-burst" id="stickyJoin" href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg><span>Přidat se</span><b id="stickyFree">2 místa</b></a>
 
 <footer class="foot" id="foot">
   <div class="wrap">
@@ -1487,10 +1475,8 @@ function renderHero(){
   setCount($("#pMembers"), d.members.length, "frac", d.cap);
   setCount($("#pDia"), d.deposited, "big");
   setCount($("#pMedals"), d.medals || 0, "int");
-  $("#cbLvl").textContent = d.level; $("#cmLevel").textContent = "Level " + d.level;
-  $("#cmMedals").textContent = nf.format(d.medals || 0) + " medailí"; $("#cmSince").textContent = "od " + new Date(d.created*1000).getFullYear();
+  $("#cbLvl").textContent = d.level;
   const worst = Math.max(...d.hist.map(h => h.place || 0)), lastPlace = d.hist[d.hist.length - 1]?.place;
-  $("#leadClimb").textContent = `z ${nf.format(worst)}. místa na ${lastPlace}.`;
 }
 function renderTicker(){
   const d = state.data;
@@ -1499,6 +1485,7 @@ function renderTicker(){
   const top = d.members.slice().sort((x, y) => y.cw - x.cw).slice(0, 14);
   const b = top.map((m, i) => `<span class="tk pl">${avatar(m, "av-xs")}${esc(m.display)}<b class="num">${nf.format(m.cw)} CW</b></span>`).join("");
   $("#ticker2").innerHTML = b + `<span aria-hidden="true" style="display:contents">${b}</span>`;
+
 }
 function monthYear(ts){ const d = new Date(ts*1000); return `${d.getMonth()+1}/${String(d.getFullYear()).slice(2)}`; }
 function memberCard(m){
@@ -1539,7 +1526,7 @@ function renderChart(){
   const cw = sky.clientWidth || 700;
   const FW = Math.min(620, cw * .8), FD = Math.max(80, FW * .24);
   const sp = FW / n, bw = sp * .62, lo = Math.log(20), hi = Math.log(3000);
-  const maxH = Math.min(210, FW * .34), minH = 8;
+  const maxH = Math.min(175, FW * .28), minH = 8;
   const hOf = p => minH + (1 - (Math.log(p) - lo) / (hi - lo)) * (maxH - minH);
   floor.style.width = FW + "px"; floor.style.height = FD + "px";
   const h50 = hOf(50);
@@ -1556,9 +1543,7 @@ function renderChart(){
   floor.innerHTML = html;
   const worst = Math.max(...hist.map(h => h.place)), best = Math.min(...hist.map(h => h.place)), lp = hist[n-1].place;
   $("#climbBig").innerHTML = `<span class="from">#${nf.format(worst)}</span><svg><use href="#i-up"/></svg><span class="to">#${lp}</span>`;
-  $("#climbText").textContent = `Každá věž je jedna z posledních ${n} Clan Wars. Čím vyšší věž, tím lepší umístění.`;
   $("#bestPlace").textContent = "#" + best;
-  $("#skyRange").textContent = `${battleName(hist[0].id)} až ${battleName(hist[n-1].id)}`;
 }
 function drawChart(){
   if (state.chartDrawn) return; state.chartDrawn = true;
@@ -1575,9 +1560,9 @@ function renderBento(){
 function renderMinis(){
   const d = state.data, lo = Math.log(20), hi = Math.log(3000);
   const last6 = d.hist.slice(-6);
-  $("#miniGrow").innerHTML = last6.map((h, k) => `<i style="--k:${k};--h:${(14 + (1 - (Math.log(h.place) - lo) / (hi - lo)) * 58).toFixed(0)}%"><span>#${h.place}</span></i>`).join("");
+  if ($("#miniGrow")) $("#miniGrow").innerHTML = last6.map((h, k) => `<i style="--k:${k};--h:${(14 + (1 - (Math.log(h.place) - lo) / (hi - lo)) * 58).toFixed(0)}%"><span>#${h.place}</span></i>`).join("");
   const top = d.members.slice().sort((a, b) => b.cw - a.cw).slice(0, 6);
-  $("#miniTeam").innerHTML = top.map((m, k) => avatar(m, "", `--k:${k}`)).join("") + `<span class="more">+${Math.max(0, d.members.length - top.length)}</span>`;
+  if ($("#miniTeam")) $("#miniTeam").innerHTML = top.map((m, k) => avatar(m, "", `--k:${k}`)).join("") + `<span class="more">+${Math.max(0, d.members.length - top.length)}</span>`;
   const total = Math.min(60, d.battleCount), start = total - d.hist.length;
   let dots = "";
   for (let j = 0; j < total; j++) {
@@ -1612,7 +1597,7 @@ function renderPodium(all, anim){
     const m = all[ri]; if (!m) return;
     const h = hs[ri], x = slot * (bw + gap), val = state.metric === "cw" ? m.cw : m.dia;
     html += `<div class="pg pg${ri+1}${pre}" data-pid="${m.id}" style="left:${x.toFixed(1)}px;top:0;width:${bw.toFixed(1)}px;height:${bd.toFixed(1)}px;--i:${ri === 0 ? 1 : ri === 1 ? 0 : 2}">
-      ${cub(bw, bd, h, "", `<span class="pg-num" style="--nf:${(h * .62).toFixed(0)}px">${ri + 1}</span>`)}
+      ${cub(bw, bd, h, "", `<span class="pg-num" style="--nf:${Math.min(h * .72, bw * .4).toFixed(0)}px">${ri + 1}</span>`)}
       <div class="bbw" style="left:${(bw/2).toFixed(1)}px;top:${(bd/2).toFixed(1)}px;transform:translateZ(${h.toFixed(1)}px)">
         ${ri === 0 ? `<div class="bb pg-beam" style="--bw2:${(bw * 1.5).toFixed(0)}px"></div>` : ""}
         <div class="bb pg-card" style="--cw:${Math.max(100, Math.min(170, bw - 10)).toFixed(0)}px">${ri === 0 ? '<svg class="crown"><use href="#i-crown"/></svg>' : ""}${avatar(m)}<b>${esc(m.display)}</b><span>@${esc(m.name)}</span>
@@ -1643,7 +1628,7 @@ function renderBoard(animate){
   $("#pod3d").style.display = showPod ? "" : "none";
   if (showPod) renderPodium(all, animate);
   const list = showPod ? filtered.slice(3) : filtered;
-  const limit = state.showAll || q ? list.length : (showPod ? 9 : 12);
+  const limit = state.showAll || q ? list.length : (showPod ? 5 : 8);
   const shown = list.slice(0, limit);
   rowsEl.innerHTML = shown.length ? shown.map(m => {
     const [rl, lead] = roleOf(m), v = state.metric === "cw" ? m.cw : m.dia;
@@ -1724,6 +1709,7 @@ function renderRecruit(){
   else if (free < 5) fs.textContent = `Zbývají ${free} ${slotsWord(free)} z ${d.cap}.`;
   else fs.textContent = `Zbývá ${free} ${slotsWord(free)} z ${d.cap}.`;
   $("#chatOnline").textContent = `${d.members.length} členů`;
+  $("#stickyFree").textContent = free > 0 ? `${free} ${free === 1 ? "místo" : free < 5 ? "místa" : "míst"}` : "plno";
 }
 function renderOrbit(){
   const small = innerWidth < 720, d = state.data, ms = d.members.slice().sort((a,b) => b.cw - a.cw).slice(0, small ? 10 : 16), n = ms.length;
@@ -1828,7 +1814,7 @@ links.forEach(a => { a.addEventListener("mouseenter", () => { hoverLink = a; pla
 $("#navLinks").addEventListener("mouseleave", () => { hoverLink = null; placeNavPill(activeLink); });
 
 // scroll loop
-const heroCopy = $("#heroCopy"), wall3d = $("#wall3d");
+const heroCopy = $("#heroCopy"), wall3d = $("#wall3d"), finalEl = $(".final"), stickyJoin = $("#stickyJoin");
 let scrollY = 0, ticking = false;
 function onScroll(){
   scrollY = window.scrollY; if (ticking) return; ticking = true;
@@ -1837,6 +1823,8 @@ function onScroll(){
     const h = document.documentElement.scrollHeight - innerHeight;
     prog.style.setProperty("--p", h > 0 ? scrollY / h : 0);
     nav.classList.toggle("scrolled", scrollY > 20);
+    const fr = finalEl.getBoundingClientRect();
+    stickyJoin.classList.toggle("show", scrollY > innerHeight * .9 && fr.top > innerHeight * .8);
     if (MOTION && innerWidth > 1080 && scrollY < innerHeight * 1.2) {
       heroCopy.style.transform = `translateY(${scrollY * .18}px)`;
       heroCopy.style.opacity = clamp(1 - scrollY / 750, 0, 1);
@@ -1849,7 +1837,7 @@ function onScroll(){
 addEventListener("scroll", onScroll, { passive: true });
 
 // pointer: cursor, spotlight, wall tilt, mega text
-const curDot = $("#curDot"), curRing = $("#curRing"), wallEl = $("#wall");
+const dummy = document.createElement("i"), curDot = dummy, curRing = dummy, wallEl = $("#wall");
 let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my, wallRX = 12, wallRY = -16, wallTX = 12, wallTY = -16;
 const mega = $("#mega");
 addEventListener("pointermove", e => {
@@ -1869,16 +1857,15 @@ addEventListener("pointermove", e => {
 }, { passive: true });
 document.addEventListener("pointerleave", () => { curDot.classList.add("hide"); curRing.classList.add("hide"); });
 document.addEventListener("pointerenter", () => { curDot.classList.remove("hide"); curRing.classList.remove("hide"); });
+let heroVis = true;
+if ("IntersectionObserver" in window) new IntersectionObserver(es => { heroVis = es[0].isIntersecting; }).observe($("#hero"));
 function loop(t){
   tickScenes(t || 0);
-  if (FINE && MOTION) {
-    rx = lerp(rx, mx, .18); ry = lerp(ry, my, .18);
-    curDot.style.transform = `translate3d(${mx}px,${my}px,0)`;
-    curRing.style.transform = `translate3d(${rx}px,${ry}px,0)`;
-  }
-  if (MOTION) {
-    wallRX = lerp(wallRX, wallTX, .05); wallRY = lerp(wallRY, wallTY, .05);
-    const w = wallEl; w.style.setProperty("--rx", wallRX.toFixed(2) + "deg"); w.style.setProperty("--ry", wallRY.toFixed(2) + "deg");
+  if (MOTION && heroVis) {
+    const nx = lerp(wallRX, wallTX, .06), ny = lerp(wallRY, wallTY, .06);
+    if (Math.abs(nx - wallRX) > .01 || Math.abs(ny - wallRY) > .01) {
+      wallRX = nx; wallRY = ny; wallEl.style.setProperty("--rx", wallRX.toFixed(2) + "deg"); wallEl.style.setProperty("--ry", wallRY.toFixed(2) + "deg");
+    }
   }
   requestAnimationFrame(loop);
 }
@@ -1898,12 +1885,6 @@ function bindTilt(scope){
   });
 }
 setTimeout(() => bindTilt(document), 1600);
-
-// magnetic buttons
-if (FINE && MOTION) $$("[data-magnet]").forEach(b => {
-  b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect(); const dx = e.clientX - (r.left + r.width/2), dy = e.clientY - (r.top + r.height/2); b.style.transform = `translate(${dx*.22}px,${dy*.3}px)`; });
-  b.addEventListener("pointerleave", () => { b.style.transform = ""; });
-});
 
 // brand scramble
 const SCR = "W0M1#$%&@*+=?ABCDEFXYZ0123456789";
@@ -1972,9 +1953,10 @@ function glProgram(gl, vs, fs){
   const p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p);
   if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p)); return p;
 }
-function visibleLoop(el, frame){
+function visibleLoop(el, frame, fps){
   let vis = true, raf = 0, last = performance.now();
-  const run = (t) => { const dt = Math.min(.05, (t - last) / 1000); last = t; frame(t / 1000, dt); if (vis) raf = requestAnimationFrame(run); };
+  const gap = fps ? 1000 / fps - 2 : 0;
+  const run = (t) => { if (vis) raf = requestAnimationFrame(run); if (gap && t - last < gap) return; const dt = Math.min(.05, (t - last) / 1000); last = t; frame(t / 1000, dt); };
   if ("IntersectionObserver" in window) new IntersectionObserver(es => { const v = es[0].isIntersecting; if (v && !vis) { vis = true; last = performance.now(); raf = requestAnimationFrame(run); } else if (!v) { vis = false; cancelAnimationFrame(raf); } }).observe(el);
   raf = requestAnimationFrame(run);
 }
@@ -1985,7 +1967,7 @@ function visibleLoop(el, frame){
   const FS = `precision mediump float;uniform vec2 r;uniform float t;uniform vec2 m;
   float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
   float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
-  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v;}
   void main(){vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;float tt=t*.05;
    p+=(m-.5)*vec2(.25,-.18);
    vec2 q=vec2(fbm(p*1.5+tt),fbm(p*1.5-tt+3.1));
@@ -2011,7 +1993,7 @@ function visibleLoop(el, frame){
     uR = gl.getUniformLocation(prog, "r"); uT = gl.getUniformLocation(prog, "t"); uM = gl.getUniformLocation(prog, "m");
     size(); ok = true; cv.classList.add("on");
   }
-  function size(){ if (!gl) return; const w = cv.clientWidth, h = cv.clientHeight; cv.width = Math.max(2, Math.round(w * .5)); cv.height = Math.max(2, Math.round(h * .5)); gl.viewport(0, 0, cv.width, cv.height); }
+  function size(){ if (!gl) return; const w = cv.clientWidth, h = cv.clientHeight; cv.width = Math.max(2, Math.round(w * .33)); cv.height = Math.max(2, Math.round(h * .33)); gl.viewport(0, 0, cv.width, cv.height); }
   cv.addEventListener("webglcontextlost", e => { e.preventDefault(); ok = false; });
   cv.addEventListener("webglcontextrestored", setup);
   if ("ResizeObserver" in window) new ResizeObserver(size).observe(cv); else addEventListener("resize", size);
@@ -2019,13 +2001,13 @@ function visibleLoop(el, frame){
   let amx = .5, amy = .5;
   const frame = (t) => { if (!ok) return; amx = lerp(amx, mx / innerWidth, .03); amy = lerp(amy, my / innerHeight, .03);
     gl.uniform2f(uR, cv.width, cv.height); gl.uniform1f(uT, MOTION ? t : 20); gl.uniform2f(uM, amx, amy); gl.drawArrays(gl.TRIANGLES, 0, 3); };
-  if (MOTION) visibleLoop(cv, frame); else frame(20);
+  if (MOTION) visibleLoop(cv, frame, 30); else frame(20);
 })();
 
 /* ---------- hero sparkles ---------- */
 (function sparkles(){
   const cv = $("#spark"), ctx = cv.getContext("2d"); let W = 0, H = 0, ps = [];
-  function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; const n = Math.min(90, Math.round(W * H / 16000)); ps = Array.from({ length: n }, () => mk(true)); }
+  function size(){ W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; const n = Math.min(40, Math.round(W * H / 32000)); ps = Array.from({ length: n }, () => mk(true)); }
   function mk(any){ return { x: Math.random() * W, y: any ? Math.random() * H : H + 10, r: Math.random() * 2.2 + .4, vy: -(Math.random() * .25 + .06), ph: Math.random() * 6.28, sp: Math.random() * 2 + .6, star: Math.random() < .22, c: Math.random() < .35 ? "114,228,255" : Math.random() < .5 ? "208,139,255" : "255,255,255" }; }
   size(); addEventListener("resize", size);
   const frame = (t) => {
@@ -2045,110 +2027,6 @@ function visibleLoop(el, frame){
   if (MOTION) visibleLoop(cv, frame); else frame(0);
 })();
 
-/* ---------- 3D diamond ---------- */
-(function diamond(){
-  const cv = $("#gem"), stage = $("#gemStage"), hint = stage.querySelector(".gem-hint");
-  // geometry: brilliant-ish cut, flat shaded
-  const N = 8, T = [], G = [], P = [], tY = .52, gY = .16, aY = -1.0;
-  for (let i = 0; i < N; i++) { const a = i / N * Math.PI * 2 + Math.PI / N; T.push([Math.cos(a) * .56, tY, Math.sin(a) * .56]); }
-  for (let i = 0; i < N * 2; i++) { const a = i / (N * 2) * Math.PI * 2 + Math.PI / N; G.push([Math.cos(a), gY, Math.sin(a)]); }
-  for (let i = 0; i < N; i++) { const a = i / N * Math.PI * 2; P.push([Math.cos(a) * .46, -.42, Math.sin(a) * .46]); }
-  const apex = [0, aY, 0], ctr = [0, tY, 0], tris = [];
-  for (let i = 0; i < N; i++) {
-    const a = T[i], b = T[(i+1)%N], g0 = G[2*i], g1 = G[2*i+1], g2 = G[(2*i+2)%(2*N)], p0 = P[i], p1 = P[(i+1)%N];
-    tris.push([ctr, b, a], [a, b, g1], [a, g1, g0], [b, g2, g1], [g0, g1, p0], [g1, g2, p1], [g1, p1, p0], [p0, p1, apex]);
-  }
-  const pos = [], nor = [];
-  const sub = (u, v) => [u[0]-v[0], u[1]-v[1], u[2]-v[2]], cross = (u, v) => [u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]];
-  tris.forEach(([a, b, c]) => {
-    let nn = cross(sub(b, a), sub(c, a)); const l = Math.hypot(...nn) || 1; nn = nn.map(v => v / l);
-    const cen = [(a[0]+b[0]+c[0])/3, (a[1]+b[1]+c[1])/3 + .2, (a[2]+b[2]+c[2])/3];
-    if (nn[0]*cen[0] + nn[1]*cen[1] + nn[2]*cen[2] < 0) nn = nn.map(v => -v);
-    [a, b, c].forEach(v => { pos.push(v[0], v[1] + .2, v[2]); nor.push(...nn); });
-  });
-  const VS = `attribute vec3 p;attribute vec3 nn;uniform mat4 M;uniform mat4 PV;uniform vec3 eye;varying vec3 vN;varying vec3 vW;
-    void main(){vec4 w=M*vec4(p,1.);vW=w.xyz;vN=(M*vec4(nn,0.)).xyz;gl_Position=PV*w;}`;
-  const FS = `precision mediump float;varying vec3 vN;varying vec3 vW;uniform float t;uniform vec3 eye;
-    vec3 pal(float x){return vec3(.6,.55,.8)+vec3(.4,.4,.3)*cos(6.2831*(x+vec3(0.,.33,.67)));}
-    void main(){vec3 N=normalize(vN);vec3 V=normalize(eye-vW);
-     vec3 L1=normalize(vec3(.6,.9,.6)),L2=normalize(vec3(-.8,.1,.6)),L3=normalize(vec3(0.,-1.,.3));
-     float d=max(dot(N,L1),0.)*.75+max(dot(N,L2),0.)*.35+max(dot(N,L3),0.)*.25;
-     float fr=pow(1.-max(dot(N,V),0.),2.2);
-     float s=pow(max(dot(N,normalize(L1+V)),0.),70.)+pow(max(dot(N,normalize(L2+V)),0.),40.)*.6;
-     vec3 base=mix(vec3(.18,.62,.95),vec3(.6,.3,.98),clamp(N.y*.6+.5,0.,1.));
-     vec3 iri=pal(dot(N,V)*1.3+N.x*.5+N.z*.3+t*.07);
-     gl_FragColor=vec4(base*(.22+d*.9)+iri*(fr*1.1+.12)+vec3(1.)*s*1.4,1.);}`;
-  const mul = (a, b) => { const o = new Array(16); for (let c = 0; c < 4; c++) for (let r = 0; r < 4; r++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k*4+r] * b[c*4+k]; o[c*4+r] = s; } return o; };
-  const rotY = (t) => { const c = Math.cos(t), s = Math.sin(t); return [c,0,-s,0, 0,1,0,0, s,0,c,0, 0,0,0,1]; };
-  const rotX = (t) => { const c = Math.cos(t), s = Math.sin(t); return [1,0,0,0, 0,c,s,0, 0,-s,c,0, 0,0,0,1]; };
-  const persp = (fov, asp, n, f) => { const q = 1 / Math.tan(fov / 2); return [q/asp,0,0,0, 0,q,0,0, 0,0,(f+n)/(n-f),-1, 0,0,2*f*n/(n-f),0]; };
-
-  let gl = null, ok = false, uM, uPV, uT, uEye;
-  function setup(){
-    ok = false;
-    try { gl = cv.getContext("webgl", { antialias: true, alpha: true, premultipliedAlpha: true }); } catch (e) { gl = null; }
-    if (!gl || gl.isContextLost()) { if (!gl) hint.style.display = "none"; return; }
-    let prog; try { prog = glProgram(gl, VS, FS); } catch (e) { return; }
-    gl.useProgram(prog);
-    const mkBuf = (data, name) => { const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(data), gl.STATIC_DRAW); const l = gl.getAttribLocation(prog, name); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, 3, gl.FLOAT, false, 0, 0); };
-    mkBuf(pos, "p"); mkBuf(nor, "nn");
-    uM = gl.getUniformLocation(prog, "M"); uPV = gl.getUniformLocation(prog, "PV"); uT = gl.getUniformLocation(prog, "t"); uEye = gl.getUniformLocation(prog, "eye");
-    gl.enable(gl.DEPTH_TEST);
-    size(); ok = true;
-  }
-  function size(){
-    if (!gl) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2), w = Math.max(2, stage.clientWidth), h = Math.max(2, stage.clientHeight);
-    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); gl.viewport(0, 0, cv.width, cv.height);
-  }
-  cv.addEventListener("webglcontextlost", e => { e.preventDefault(); ok = false; });
-  cv.addEventListener("webglcontextrestored", setup);
-  if ("ResizeObserver" in window) new ResizeObserver(size).observe(stage); else addEventListener("resize", size);
-  setup();
-
-  // interaction: drag to spin (tracked on window so it never gets stuck), hover to lean
-  let ang = 0, vel = .7, tilt = .3, tiltT = .3, lean = 0, leanY = 0, drag = false, lx = 0, ly = 0, hx = 0, hy = 0, moved = 0;
-  stage.addEventListener("pointerdown", e => {
-    drag = true; moved = 0; lx = e.clientX; ly = e.clientY; vel = 0; stage.classList.add("dragging");
-    try { stage.setPointerCapture(e.pointerId); } catch (_) {}
-    if (e.pointerType === "mouse") e.preventDefault();
-  });
-  addEventListener("pointermove", e => {
-    if (drag) {
-      const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy);
-      ang += dx * .016; tiltT = clamp(tiltT + dy * .008, -.45, 1.1); vel = clamp(dx * 1.4, -45, 45);
-      return;
-    }
-    const r = stage.getBoundingClientRect();
-    if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) { hx = (e.clientX - r.left) / r.width - .5; hy = (e.clientY - r.top) / r.height - .5; } else { hx = 0; hy = 0; }
-  }, { passive: true });
-  const end = () => {
-    if (!drag) return; drag = false; stage.classList.remove("dragging");
-    if (Math.abs(vel) > 10) { const r = stage.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height * .42, 26, 7, ["#72E4FF","#C987FF","#FFFFFF"]); }
-    if (moved < 4) vel = 22;
-  };
-  addEventListener("pointerup", end); addEventListener("pointercancel", end); addEventListener("blur", end);
-
-  const R = 1.25, FOV = .62, tanF = Math.tan(FOV / 2);
-  const frame = (t, dt) => {
-    if (!ok) return;
-    if (!drag) { vel = lerp(vel, .7, .025); ang += vel * dt; }
-    tilt = lerp(tilt, tiltT + hy * .5, .1); lean = lerp(lean, hx * .9, .08); leanY = lerp(leanY, hx * .25, .08);
-    const asp = cv.width / cv.height;
-    // fit the gem in whichever side is tighter, leave room for the label at the bottom
-    const D = Math.max(R / (.6 * tanF), R / (.55 * tanF * asp));
-    const lift = .1 * D * tanF, bob = Math.sin(t * 1.4) * .05 * D * tanF * .3;
-    const V = [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,lift + bob,-D,1];
-    const PV = mul(persp(FOV, asp, .1, D + 10), V);
-    const M = mul(rotX(tilt), mul(rotY(ang + lean), [Math.cos(leanY),Math.sin(leanY),0,0, -Math.sin(leanY),Math.cos(leanY),0,0, 0,0,1,0, 0,0,0,1]));
-    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.uniformMatrix4fv(uM, false, new Float32Array(M)); gl.uniformMatrix4fv(uPV, false, new Float32Array(PV));
-    gl.uniform1f(uT, t); gl.uniform3f(uEye, 0, -(lift + bob), D);
-    gl.drawArrays(gl.TRIANGLES, 0, pos.length / 3);
-  };
-  if (MOTION) visibleLoop(cv, frame); else frame(0, 0);
-})();
-
 /* ================= 3D scenes (mouse-tilted floors) ================= */
 const scenes = [];
 function addScene(id, fx, fz, rx, rz, sway){
@@ -2163,7 +2041,7 @@ function applyScene(o){ const f = o.el.querySelector(".floor"); if (!f) return; 
 function tickScenes(t){
   if (!MOTION) return;
   const s = t / 1000;
-  scenes.forEach(o => { if (!o.vis) return; o.cx = lerp(o.cx, o.tx + Math.cos(s * .35) * o.sway * .4, .06); o.cz = lerp(o.cz, o.tz + Math.sin(s * .4) * o.sway, .06); applyScene(o); });
+  scenes.forEach(o => { if (!o.vis) return; if (Math.abs(o.cx - o.tx) < .02 && Math.abs(o.cz - o.tz) < .02) return; o.cx = lerp(o.cx, o.tx, .08); o.cz = lerp(o.cz, o.tz, .08); applyScene(o); });
 }
 
 /* ================= holo cards ================= */
@@ -2222,7 +2100,6 @@ ask(0, true);
 /* ================= boot ================= */
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { sizeFx(); renderChart(); renderBoard(false); renderSeats(); renderOrbit(); layoutTrack(); moveSeg(); placeNavPill(hoverLink || activeLink); }, 150); });
 state.data = fromSnapshot();
-renderTiers();
 renderAll(false);
 moveSeg();
 addScene("sky", 58, -30, 14, 34, 3);
