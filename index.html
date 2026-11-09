@@ -620,9 +620,9 @@ html.motion .team .av{animation:hop 2.4s ease-in-out infinite;animation-delay:ca
 html.motion .in .dots i{animation:dotIn .5s var(--ease) both;animation-delay:calc(var(--k) * 22ms)}
 @keyframes dotIn{from{transform:scale(0);opacity:0}}
 .gem-rise{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:inherit}
-.gem-rise svg{position:absolute;left:var(--x);bottom:-30px;width:calc(26px * var(--s));height:calc(26px * var(--s));color:var(--diamond);opacity:.0;filter:drop-shadow(0 0 8px rgba(114,228,255,.7))}
-html.motion .gem-rise svg{animation:gemUp 5s linear infinite;animation-delay:var(--d)}
-html.still .gem-rise svg{opacity:.35;bottom:40%}
+.gem-rise i{position:absolute;left:var(--x);bottom:-30px;width:calc(26px * var(--s));height:calc(26px * var(--s));color:var(--diamond);opacity:.0;filter:drop-shadow(0 0 8px rgba(114,228,255,.7))}
+html.motion .gem-rise i{animation:gemUp 5s linear infinite;animation-delay:var(--d)}
+html.still .gem-rise i{opacity:.35;bottom:40%}
 @keyframes gemUp{0%{transform:translateY(0) rotate(0);opacity:0}15%{opacity:.8}80%{opacity:.5}100%{transform:translateY(-220px) rotate(40deg);opacity:0}}
 .lvl{display:flex;gap:6px}
 .lvl i{width:24px;height:27px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(180deg,#D9A8FF,#7B35D9);display:grid;place-items:center;font-style:normal;font-size:10.5px;font-weight:800;color:#fff}
@@ -1051,6 +1051,58 @@ html.motion .gift-box{animation:giftWiggle 3.5s ease-in-out infinite}
 .chart-cap{flex-wrap:wrap}
 .pod3d{height:440px}
 @media (max-width:720px){.sec{padding-top:48px}.final{margin-top:48px}.sky .floor{top:60%}}
+
+/* v7 */
+.gem,.gi,.gem-rise i{display:inline-block;background:url("data:image/webp;base64,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") center/contain no-repeat}
+.gem{width:.9em;height:.9em;filter:drop-shadow(0 2px 6px rgba(114,228,255,.35))}
+.tn-node .gi{width:calc(var(--s) * .62);height:calc(var(--s) * .62);transform:rotate(-45deg);filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+.gem-rise i{filter:drop-shadow(0 0 8px rgba(114,228,255,.6))}
+.hero-ctas{margin-top:30px}
+.cta-discord{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:16px;min-height:76px;padding:12px 22px 12px 12px;border-radius:22px;color:#fff;
+  background:linear-gradient(135deg,#7B86FF,#5865F2 45%,#4450D6);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.18),0 18px 50px -12px rgba(88,101,242,.9);transition:transform .35s var(--ease),box-shadow .3s}
+.cta-discord::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1}
+html.motion .cta-discord::before{animation:ctaPulse 2.2s ease-out infinite}
+@keyframes ctaPulse{0%{box-shadow:0 0 0 0 rgba(120,130,255,.65)}100%{box-shadow:0 0 0 18px rgba(120,130,255,0)}}
+.cta-discord .cd-shine{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.cta-discord .cd-shine::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-18deg)}
+html.motion .cta-discord .cd-shine::after{animation:shine 4s 1.5s var(--ease) infinite}
+.cta-discord:hover{transform:translateY(-3px) scale(1.02);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 0 0 1px rgba(255,255,255,.25),0 26px 60px -12px rgba(88,101,242,1)}
+.cd-ico{width:52px;height:52px;flex:none;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.cd-ico svg{width:30px;height:30px}
+.cd-txt{display:flex;flex-direction:column;gap:2px;text-align:left}
+.cd-txt b{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.cd-txt small{font-size:13.5px;opacity:.85}
+.cd-arrow{width:22px;height:22px;margin-left:6px;flex:none;transition:transform .3s var(--ease)}
+.cta-discord:hover .cd-arrow{transform:translateX(4px)}
+.proof{margin-top:34px}
+.proof-row{grid-template-columns:repeat(3,auto)}
+.hero h1{margin-top:20px}
+@media (max-width:720px){
+  .cta-discord{display:flex;width:100%}
+  .cta-discord .cd-arrow{margin-left:auto}
+  .cd-txt b{font-size:19px}
+  .proof-row{grid-template-columns:repeat(3,auto);gap:10px 26px}
+  .proof-item strong{font-size:26px}
+}
+
+@media (max-width:720px){
+  .seats3d{flex:none;height:210px;min-height:210px;margin:0 -10px}
+  .seats3d .floor{top:64%}
+  .join{padding:24px}
+  .join .btns{flex-wrap:nowrap}
+  .join .btns .btn-primary{flex:1}
+  .join-slots strong{font-size:72px}
+  .chat{height:430px}
+  .chat-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:0 14px}
+  .chat-chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+  .wall-3d{height:360px}
+  .pg-card{padding:8px 4px 9px}
+  .pg-card>span{display:none}
+  .gem-rise{display:none}
+  .gift{padding:16px}
+  .gift-live{display:none}
+}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -1121,23 +1173,19 @@ html.motion .gift-box{animation:giftWiggle 3.5s ease-in-out infinite}
             <div class="cm-sub">Pet Simulator 99 klan</div>
           </div>
         </div>
-        <a class="pill ring" href="#o-klanu" id="heroPill" data-rv data-hero style="--d:.08s">
-          <span class="pill-tag" id="pillTag">Clan War</span>
-          <span id="pillText">Halloween Games jsme dohráli na 35. místě</span>
-          <svg><use href="#i-right"/></svg>
-        </a>
         <h1 class="split" data-hero data-split style="--d:.12s">Český klan, který jde po&nbsp;top&nbsp;50.</h1>
-        <p class="hero-lead" data-rv data-hero style="--d:.55s">Aktivní parta, týdenní odměny v&nbsp;diamantech a&nbsp;giveawaye na Discordu. <strong>Hledáme hráče, co chtějí hrát naplno.</strong></p>
-        <div class="hero-ctas" data-rv data-hero style="--d:.7s">
-          <a class="btn btn-primary btn-shine js-burst" data-magnet href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener"><svg><use href="#i-discord"/></svg>Přidat se na Discordu</a>
-          <a class="btn btn-ghost" data-magnet href="#clenove">Zobrazit žebříček</a>
+        <div class="hero-ctas" data-rv data-hero style="--d:.55s">
+          <a class="cta-discord js-burst" href="https://discord.gg/jHgnmqPN8R" target="_blank" rel="noopener">
+            <span class="cd-ico"><svg><use href="#i-discord"/></svg></span>
+            <span class="cd-txt"><b>Přidat se na Discord</b><small id="ctaSlots">volná místa v klanu</small></span>
+            <svg class="cd-arrow"><use href="#i-right"/></svg><span class="cd-shine"></span>
+          </a>
         </div>
         <div class="proof" data-rv data-hero style="--d:.85s">
           <div class="proof-row">
             <div class="proof-item"><strong class="num" id="pRank">#35</strong><span id="pRankLbl">poslední Clan War</span></div>
-            <div class="proof-item"><strong class="num" id="pMembers">48/50</strong><span>členů v klanu</span></div>
-            <div class="proof-item"><strong class="num"><span id="pDia">13,8 mld</span><svg class="gem"><use href="#i-gem"/></svg></strong><span>vloženo do klanu</span></div>
-            <div class="proof-item"><strong class="num" id="pMedals">25</strong><span>medailí z bitev</span></div>
+            <div class="proof-item"><strong class="num" id="pMembers">48/50</strong><span>členů</span></div>
+            <div class="proof-item"><strong class="num" id="pMedals">25</strong><span>medailí</span></div>
           </div>
         </div>
       </div>
@@ -1174,8 +1222,8 @@ html.motion .gift-box{animation:giftWiggle 3.5s ease-in-out infinite}
           <div><strong class="num" id="sBattles">45</strong><span class="st-l">odehraných Clan Wars</span></div>
         </article>
         <article class="card spot stat-tile b-s2" data-rv data-tilt style="--d:.1s"><span class="edge"></span>
-          <div class="gem-rise" aria-hidden="true"><svg style="--x:12%;--d:0s;--s:1"><use href="#i-gem"/></svg><svg style="--x:40%;--d:-1.6s;--s:.6"><use href="#i-gem"/></svg><svg style="--x:66%;--d:-.8s;--s:.5"><use href="#i-gem"/></svg><svg style="--x:84%;--d:-3s;--s:.75"><use href="#i-gem"/></svg></div>
-          <div><strong class="num"><span id="sDia">19,4 mld</span><svg class="gem"><use href="#i-gem"/></svg></strong><span class="st-l">diamantů vložených do klanu</span></div>
+          <div class="gem-rise" aria-hidden="true"><i style="--x:12%;--d:0s;--s:1"></i><i style="--x:40%;--d:-1.6s;--s:.6"></i><i style="--x:66%;--d:-.8s;--s:.5"></i><i style="--x:84%;--d:-3s;--s:.75"></i></div>
+          <div><strong class="num"><span id="sDia">19,4 mld</span><i class="gem"></i></strong><span class="st-l">diamantů vložených do klanu</span></div>
         </article>
         <article class="card spot stat-tile b-s3" data-rv data-tilt style="--d:.2s"><span class="edge"></span>
           <div class="lvl" id="lvlHex" aria-hidden="true"></div>
@@ -1256,9 +1304,8 @@ html.motion .gift-box{animation:giftWiggle 3.5s ease-in-out infinite}
               <h3>Co chceme</h3>
               <ul class="req-list quests" id="quests">
                 <li style="--q:0"><span class="ico"><svg><use href="#i-calendar"/></svg></span><div class="q-body"><b>Hraješ každý den</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
-                <li style="--q:1"><span class="ico"><svg><use href="#i-gem"/></svg></span><div class="q-body"><b>Vkládáš diamanty</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
-                <li style="--q:2"><span class="ico"><svg><use href="#i-bolt"/></svg></span><div class="q-body"><b>Hraješ Clan Wars</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
-                <li style="--q:3"><span class="ico"><svg><use href="#i-discord"/></svg></span><div class="q-body"><b>Jsi na Discordu</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
+                <li style="--q:1"><span class="ico"><svg><use href="#i-bolt"/></svg></span><div class="q-body"><b>Hraješ Clan Wars</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
+                <li style="--q:2"><span class="ico"><svg><use href="#i-discord"/></svg></span><div class="q-body"><b>Jsi na Discordu</b><span class="q-bar"><i></i></span></div><span class="chk"><svg><use href="#i-check"/></svg></span></li>
               </ul>
             </div>
           </div>
@@ -1357,7 +1404,7 @@ const nf = new Intl.NumberFormat("cs-CZ");
 const n1 = (v) => v.toLocaleString("cs-CZ", { maximumFractionDigits: 1 });
 function big(v){ if (v >= 1e9) return n1(v/1e9) + " mld"; if (v >= 1e6) return n1(v/1e6) + " mil."; if (v >= 1e4) return n1(v/1e3) + " tis."; return nf.format(Math.round(v)); }
 const esc = (s) => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const gem = '<svg class="gem" aria-hidden="true"><use href="#i-gem"/></svg>';
+const gem = '<i class="gem" aria-hidden="true"></i>';
 const MONTHS = ["ledna","února","března","dubna","května","června","července","srpna","září","října","listopadu","prosince"];
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -1422,7 +1469,7 @@ async function loadLive(){
   try {
     const t = await getJSON(`https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${ids.slice(0,100).join(",")}&size=150x150&format=Png&isCircular=false`);
     t.data.forEach(x => { if (x.state === "Completed" && x.imageUrl) state.thumbs[x.targetId] = x.imageUrl; });
-    renderWall(); renderBoard(false); renderProj(); renderTicker();
+    renderWall(); renderBoard(false); renderProj(); renderTicker(); renderOrbit(); renderMinis();
   } catch (e) {}
 }
 function battleInfo(d){
@@ -1468,12 +1515,11 @@ function renderStatus(){
 }
 function renderHero(){
   const d = state.data, bi = battleInfo(d);
-  $("#pillTag").textContent = bi.running ? "Právě probíhá" : "Clan War";
-  $("#pillText").textContent = bi.running ? `${bi.name}: teď jsme na ${placeWord(bi.place || "?")}, konec za ${timeLeft(bi.end)}` : `${bi.name} jsme dohráli na ${placeWord(bi.place)}`;
+  const free0 = Math.max(0, d.cap - d.members.length);
+  $("#ctaSlots").textContent = free0 > 0 ? (free0 === 1 ? "Zbývá poslední volné místo" : `Volná místa: ${free0} z ${d.cap}`) : "Klan je plný, napiš a zapíšeme tě";
   setCount($("#pRank"), bi.place || 0, "rank");
   $("#pRankLbl").textContent = bi.running ? "aktuální Clan War" : "poslední Clan War";
   setCount($("#pMembers"), d.members.length, "frac", d.cap);
-  setCount($("#pDia"), d.deposited, "big");
   setCount($("#pMedals"), d.medals || 0, "int");
   $("#cbLvl").textContent = d.level;
   const worst = Math.max(...d.hist.map(h => h.place || 0)), lastPlace = d.hist[d.hist.length - 1]?.place;
@@ -1600,7 +1646,7 @@ function renderPodium(all, anim){
       ${cub(bw, bd, h, "", `<span class="pg-num" style="--nf:${Math.min(h * .72, bw * .4).toFixed(0)}px">${ri + 1}</span>`)}
       <div class="bbw" style="left:${(bw/2).toFixed(1)}px;top:${(bd/2).toFixed(1)}px;transform:translateZ(${h.toFixed(1)}px)">
         ${ri === 0 ? `<div class="bb pg-beam" style="--bw2:${(bw * 1.5).toFixed(0)}px"></div>` : ""}
-        <div class="bb pg-card" style="--cw:${Math.max(100, Math.min(170, bw - 10)).toFixed(0)}px">${ri === 0 ? '<svg class="crown"><use href="#i-crown"/></svg>' : ""}${avatar(m)}<b>${esc(m.display)}</b><span>@${esc(m.name)}</span>
+        <div class="bb pg-card" style="--cw:${Math.max(92, Math.min(170, bw - 6)).toFixed(0)}px">${ri === 0 ? '<svg class="crown"><use href="#i-crown"/></svg>' : ""}${avatar(m)}<b>${esc(m.display)}</b><span>@${esc(m.name)}</span>
           <strong class="num"><span class="pv">${state.metric === "cw" ? nf.format(val) : big(val)}</span>${state.metric === "dia" ? gem : ""}</strong><small>${metricLabel()}</small></div>
       </div></div>`;
   });
@@ -1661,7 +1707,7 @@ function renderProj(){
   $("#proj").innerHTML = `<svg class="path" aria-hidden="true"><defs><linearGradient id="tpg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#6421C6"/><stop offset=".65" stop-color="#C987FF"/><stop offset="1" stop-color="#F5C451"/></linearGradient></defs><path class="tp-base"/><path class="tp-line"/><circle class="tp-dot" r="${MOTION ? 4.5 : 0}" fill="#fff" style="filter:drop-shadow(0 0 6px #fff)"></circle></svg>` +
     order.map(({ m, i }, j) => `<div class="tn r${i + 1}" style="--o:${((1 - REWARDS[i] / REWARDS[0]) * 150).toFixed(0)}px;--k:${j}">
       <div class="tn-player">${i === 0 ? '<svg class="crown"><use href="#i-crown"/></svg>' : ""}${avatar(m)}<b>${esc(m.display)}</b><span class="num">${nf.format(m.cw)} CW</span></div>
-      <div class="tn-node"><svg><use href="#i-gem"/></svg></div>
+      <div class="tn-node"><i class="gi"></i></div>
       <div class="tn-amt"><strong class="num">${big(REWARDS[i])}</strong><small>${i + 1}. místo</small></div></div>`).join("");
   layoutTrack();
   const sc = $(".track-scroll"); if (sc && !sc._init && sc.scrollWidth > sc.clientWidth + 4) { sc._init = true; sc.scrollLeft = sc.scrollWidth; }
@@ -2061,7 +2107,7 @@ function bindHolo(scope){
 const FAQ = [
   { q: "Jak se do klanu přidám?", a: "Připoj se na náš Discord a napiš, že chceš do W0M1. Ozveme se, domluvíme podmínky a pošleme ti pozvánku do klanu ve hře." },
   { q: "Kolik musím hrát?", a: "Počítáme s tím, že hraješ každý den a během Clan War sbíráš body. Nejde o to být první, ale nepřestat." },
-  { q: "Musím vkládat diamanty?", a: "Ano, vklady do klanu patří k podmínkám. Z nich klan roste a z nich jdou i odměny pro top 10. Kolik a kdy, si domluvíme na Discordu." },
+  { q: "Musím vkládat diamanty?", a: "Ne, vkládat diamanty nemusíš. Stačí hrát a sbírat body v Clan Wars." },
   { q: "Jak fungují odměny?", a: "Po skončení každé Clan War dostane deset hráčů s nejvíc body diamanty: první 700 milionů, desátý 100 milionů. Aktuální pořadí vidíš výš na stránce." },
   { q: "Co když nesbírám body?", a: "Pingneme tě na Discordu. Když se dlouho neozveš a nehraješ, uvolníme místo někomu, kdo chce hrát." },
   { q: "Berete i začátečníky?", a: "Ano. Vítáme hráče všech úrovní. Důležitější než velký inventář je chuť hrát a zlepšovat se." },
