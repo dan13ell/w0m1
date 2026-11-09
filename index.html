@@ -1112,6 +1112,36 @@ html.motion .cta-discord .cd-shine::after{animation:shine 4s 1.5s var(--ease) in
 }
 
 
+
+/* ===== live stream pop ===== */
+.live-pop{position:fixed;left:50%;top:80px;z-index:90;display:flex;align-items:center;gap:4px;max-width:calc(100vw - 24px);padding:8px 8px 8px 10px;border-radius:22px;
+  background:linear-gradient(135deg,rgba(40,14,34,.97),rgba(20,16,30,.97));box-shadow:inset 0 0 0 1px rgba(255,59,92,.45),0 24px 60px -18px rgba(255,40,90,.6),0 0 0 6px rgba(255,59,92,.06);
+  transform:translate(-50%,-160%);opacity:0;transition:transform .7s cubic-bezier(.3,1.4,.5,1),opacity .4s}
+.live-pop[hidden]{display:flex;visibility:hidden}
+.live-pop.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+.lp-main{display:flex;align-items:center;gap:14px;min-width:0;color:#fff}
+.lp-av{position:relative;width:54px;height:54px;flex:none}
+.lp-img{position:absolute;inset:4px;border-radius:50%;overflow:hidden;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:20px;background:linear-gradient(145deg,#FF3B5C,#7B2FE0)}
+.lp-img img{width:100%;height:100%;object-fit:cover}
+.lp-ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#FF3B5C,#25F4EE,#FF3B5C)}
+html.motion .lp-ring{animation:rot 3s linear infinite}
+.lp-av::after{content:"";position:absolute;inset:-4px;border-radius:50%;box-shadow:0 0 0 2px rgba(255,59,92,.6)}
+html.motion .lp-av::after{animation:nodeRing 1.6s ease-out infinite}
+.lp-badge{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);padding:1px 6px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.04em;background:#FF2D55;box-shadow:0 0 0 2px #1C1220}
+.lp-txt{display:flex;flex-direction:column;min-width:0}
+.lp-txt b{font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lp-txt small{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#FFB3C1;white-space:nowrap}
+.lp-txt small::before{content:"";width:7px;height:7px;border-radius:50%;background:#FF2D55;box-shadow:0 0 8px #FF2D55}
+html.motion .lp-txt small::before{animation:blinkDot 1.2s ease-in-out infinite}
+@keyframes blinkDot{50%{opacity:.25}}
+.lp-btn{margin-left:8px;flex:none;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:13px;font-weight:700;font-size:14px;color:#fff;
+  background:linear-gradient(135deg,#FF3B5C,#E0115F);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 20px -8px rgba(255,45,85,.9);transition:transform .3s var(--ease)}
+.lp-btn svg{width:16px;height:16px}
+.lp-main:hover .lp-btn{transform:scale(1.05)}
+.lp-x{width:30px;height:30px;flex:none;border:0;border-radius:10px;font-size:20px;line-height:1;color:var(--muted);background:transparent}
+.lp-x:hover{color:#fff;background:rgba(255,255,255,.06)}
+@media (max-width:520px){.live-pop{top:76px;width:calc(100vw - 24px)}.lp-main{flex:1}.lp-btn{margin-left:auto;padding:0 12px}.lp-av{width:46px;height:46px}}
+
 /* ===== v9 ===== */
 .off,.off *{animation-play-state:paused!important}
 .gift2{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;gap:16px;padding:18px 18px 18px 14px;border-radius:22px;color:#fff;
@@ -1227,6 +1257,14 @@ html.motion .gift-ico .g-spark{animation:twinkle 2s ease-in-out infinite}
   </defs>
 </svg>
 
+<div class="live-pop" id="livePop" role="status" aria-live="polite" hidden>
+  <a class="lp-main" id="lpLink" href="https://www.tiktok.com/@lukaku1_ps99/live" target="_blank" rel="noopener">
+    <span class="lp-av"><span class="lp-ring"></span><span class="lp-img" id="lpImg">L</span><span class="lp-badge">LIVE</span></span>
+    <span class="lp-txt"><b id="lpName">lukaku1_ps99</b><small id="lpSub">Právě vysílá na TikToku</small></span>
+    <span class="lp-btn"><svg><use href="#i-tiktok"/></svg>Sledovat</span>
+  </a>
+  <button class="lp-x" id="lpX" type="button" aria-label="Zavřít">×</button>
+</div>
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="W0M1, zpět nahoru"><img src="data:image/webp;base64,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" alt=""><span class="scr" data-scramble>W0M1</span></a>
@@ -2273,6 +2311,30 @@ function ask(i, instant){
 chatChips.addEventListener("click", e => { const b = e.target.closest("button.chip"); if (b) ask(+b.dataset.i); });
 chatLog.insertAdjacentHTML("beforeend", msgBot(`<p>Ahoj! Tady najdeš odpovědi na to, co nováčci řeší nejčastěji. Vyber otázku dole.</p>`));
 ask(0, true);
+
+/* ================= TikTok live pop ================= */
+// Adresa Cloudflare Workeru, který zjišťuje, jestli streamer vysílá (viz tiktok-live-worker.js).
+const LIVE_ENDPOINT = "https://w0m1-live.dan13el.workers.dev/";
+const LIVE_USER = "lukaku1_ps99";
+(function livePop(){
+  const pop = $("#livePop"); if (!pop) return;
+  let dismissed = false; try { dismissed = sessionStorage.getItem("w0m1-live-x") === "1"; } catch (e) {}
+  function show(info){
+    if (dismissed) return;
+    $("#lpName").textContent = info.nickname || LIVE_USER;
+    $("#lpSub").textContent = info.viewers ? (innerWidth < 520 ? `${nf.format(info.viewers)} diváků` : `Živě na TikToku · ${nf.format(info.viewers)} diváků`) : (innerWidth < 520 ? "Živě na TikToku" : "Právě vysílá na TikToku");
+    if (info.avatar) $("#lpImg").innerHTML = `<img src="${esc(info.avatar)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`;
+    pop.hidden = false; requestAnimationFrame(() => pop.classList.add("show"));
+  }
+  function hide(){ pop.classList.remove("show"); setTimeout(() => { if (!pop.classList.contains("show")) pop.hidden = true; }, 700); }
+  $("#lpX").addEventListener("click", () => { dismissed = true; try { sessionStorage.setItem("w0m1-live-x", "1"); } catch (e) {} hide(); });
+  if (location.hash === "#live-demo") { setTimeout(() => show({ nickname: "lukaku1_ps99", viewers: 128 }), 900); return; }
+  if (!LIVE_ENDPOINT) return;
+  async function check(){
+    try { const j = await getJSON(`${LIVE_ENDPOINT}?u=${encodeURIComponent(LIVE_USER)}`); if (j && j.live) show(j); else hide(); } catch (e) {}
+  }
+  setTimeout(check, 1200); setInterval(check, 90 * 1000);
+})();
 
 /* ================= motion toggle + CTA press ================= */
 const mt = $("#motionToggle");
